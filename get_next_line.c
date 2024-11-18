@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rafaelheringer <rafaelheringer@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:14:21 by rheringe          #+#    #+#             */
-/*   Updated: 2024/11/13 18:43:23 by rheringe         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:28:46 by rafaelherin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char	*ft_extract_line(char *rl);
-char		*ft_teste(int fd, char **rl);
-char *ft_teste2(int bytes_read, char *buffer, char *rl);
 
 char	*get_next_line(int fd)
 {
@@ -24,14 +20,14 @@ char	*get_next_line(int fd)
 	char			*temp;
 	int				bytes_read;
 
-	buffer = ft_teste(fd, &rl);
+	buffer = ft_check_buffer(fd, &rl);
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read <= 0)
 			break ;
-		rl = ft_teste2(bytes_read, buffer, rl);
+		rl = ft_get_temp(bytes_read, buffer, rl);
 		if (ft_strchr(rl, '\n'))
 			break ;
 	}
@@ -45,7 +41,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-static char	*ft_extract_line(char *rl)
+char	*ft_extract_line(char *rl)
 {
 	char	*line;
 	int		i;
@@ -69,9 +65,9 @@ static char	*ft_extract_line(char *rl)
 	return (line);
 }
 
-char	*ft_teste(int fd, char **rl)
+char	*ft_check_buffer(int fd, char **rl)
 {
-	char *buffer;
+	char	*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -83,12 +79,12 @@ char	*ft_teste(int fd, char **rl)
 	return (buffer);
 }
 
-char *ft_teste2(int bytes_read, char *buffer, char *rl)
+char	*ft_get_temp(int bytes_read, char *buffer, char *rl)
 {
-	char *temp;
-	
+	char	*temp;
+
 	buffer[bytes_read] = '\0';
 	temp = ft_strjoin(rl, buffer);
 	free(rl);
-	return(temp);
+	return (temp);
 }
