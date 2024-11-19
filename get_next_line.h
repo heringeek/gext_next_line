@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelheringer <rafaelheringer@student.    +#+  +:+       +#+        */
+/*   By: rheringe <rheringe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:18:48 by rheringe          #+#    #+#             */
-/*   Updated: 2024/11/16 23:30:59 by rafaelherin      ###   ########.fr       */
+/*   Updated: 2024/11/19 14:06:28 by rheringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-char	*ft_read_file(char *buffer, char *read_line);
 char	*get_next_line(int fd);
-char	*ft_read_file(char *buffer, char *read_line);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
